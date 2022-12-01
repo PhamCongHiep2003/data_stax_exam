@@ -28,9 +28,9 @@ import java.io.FileWriter;
 public class AuthorClean {
 
     public static void main(String[] args) {
-        int startCounter = 6300001;
+        int startCounter = 6355000;
         String outputPath = "D:\\hoc_tap_chinh_thuc\\data structure c++\\datastax\\author_by_id.csv";
-        int maxSize = 900000;
+        int maxSize = 45000;
         
         String inputFile = "D:\\hoc_tap_chinh_thuc\\data structure c++\\datastax\\ol_dump_authors_2022-10-31.txt";
         clean(outputPath, inputFile, maxSize, startCounter);

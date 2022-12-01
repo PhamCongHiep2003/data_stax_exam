@@ -42,41 +42,41 @@ public class BetterreadsDataLoaderApplication {
 	@Value("${datadump.location.works}")
 	private String worksDumpLocation;
 	
-	@PostConstruct
-	public void start() {
-		initAuthors();
-		initWorks();
-	}
+	// @PostConstruct
+	// public void start() {
+	// 	initAuthors();
+	// 	initWorks();
+	// }
 
-	private void initWorks() {
-	}
+	// private void initWorks() {
+	// }
 
 
-	private void initAuthors() {
-		Path path = Paths.get(authorDumpLocation);
-		try (Stream<String> lines = Files.lines(path);){
-			lines.limit(1).forEach(line -> {
-				String jsonString = line.substring(line.indexOf("{"));
-				try {
-					JSONObject jsonObject = new JSONObject(jsonString);
+	// private void initAuthors() {
+	// 	Path path = Paths.get(authorDumpLocation);
+	// 	try (Stream<String> lines = Files.lines(path);){
+	// 		lines.limit(1).forEach(line -> {
+	// 			String jsonString = line.substring(line.indexOf("{"));
+	// 			try {
+	// 				JSONObject jsonObject = new JSONObject(jsonString);
 
-				Author author = new Author();
-				author.setName(jsonObject.optString("name"));
-				author.setPersonalName(jsonObject.optString("personal_name"));
-				author.setId(jsonObject.optString("key").replace("/authors", ""));
+	// 			Author author = new Author();
+	// 			author.setName(jsonObject.optString("name"));
+	// 			author.setPersonalName(jsonObject.optString("personal_name"));
+	// 			author.setId(jsonObject.optString("key").replace("/authors", ""));
 				
-				System.out.println("Saving author" + author.getName() + "...");
-				authorRepository.save(author);
-				return;
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+	// 			System.out.println("Saving author" + author.getName() + "...");
+	// 			authorRepository.save(author);
+	// 			return;
+	// 			} catch (JSONException e) {
+	// 				e.printStackTrace();
+	// 			}
 				
-			});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	// 		});
+	// 	} catch (IOException e) {
+	// 		e.printStackTrace();
+	// 	}
+	// }
 
 
 	@Bean
