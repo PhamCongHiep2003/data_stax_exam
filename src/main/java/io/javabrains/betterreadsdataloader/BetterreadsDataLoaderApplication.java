@@ -23,15 +23,10 @@ import io.javabrains.betterreadsdataloader.author.Author;
 import io.javabrains.betterreadsdataloader.author.AuthorRepository;
 import io.javabrains.betterreadsdataloader.connection.DataStaxAstraProperties;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @SpringBootApplication
 @EnableConfigurationProperties(DataStaxAstraProperties.class)
+@EnableCassandraRepositories("io.javabrains.betterreadsdataloader.author")
 public class BetterreadsDataLoaderApplication {
 
 	@Autowired
@@ -58,14 +53,9 @@ public class BetterreadsDataLoaderApplication {
 
 
 	private void initAuthors() {
-		String url = "F:\\content-niit\\file-content.txt";
-        // Đọc dữ liệu từ File với Scanner
-        FileInputStream fileInputStream = new FileInputStream(url);
-        Scanner scanner = new Scanner(fileInputStream);
-
 		Path path = Paths.get(authorDumpLocation);
 		try (Stream<String> lines = Files.lines(path);){
-			lines.forEach(line -> {
+			lines.limit(1).forEach(line -> {
 				String jsonString = line.substring(line.indexOf("{"));
 				try {
 					JSONObject jsonObject = new JSONObject(jsonString);
@@ -76,7 +66,8 @@ public class BetterreadsDataLoaderApplication {
 				author.setId(jsonObject.optString("key").replace("/authors", ""));
 				
 				System.out.println("Saving author" + author.getName() + "...");
-				
+				authorRepository.save(author);
+				return;
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

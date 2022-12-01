@@ -8,6 +8,8 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
 
+import jnr.ffi.Struct.pid_t;
+
 @Table(value = "author_by_id")
 public class Author {
     @Id @PrimaryKeyColumn(name = "author_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
@@ -45,6 +47,22 @@ public class Author {
         this.personalName = personalName;
     }
 
+    public String toJson() {
+
+        String json = "{\"id\": \"%s\", \"name\": \"%s\", \"personalName\": \"%s\"}";
+        json = String.format(json, id, name, personalName);
+        return json;
+    }
+
+    public String toCSVRecord() {
+
+        String CSV = "%s,\"%s\",\"%s\"";
+        CSV = String.format(CSV, id, name, personalName);
+        return CSV;
+    }
     
+    public static String toCSVHeader() {
+        return "id,name,personalName\n";
+    }
 }
 
