@@ -24,17 +24,18 @@ public class AuthorPagination {
 
 //    String query = "select id from author_by_id";
     SimpleStatement st = 
-        QueryBuilder.selectFrom("ilc2022", "author_by_id")
-        .columns("id").build();
+        QueryBuilder.selectFrom("main", "author_by_id")
+        .columns("id", "name").build();
     // WATCH-OUT: setPageSize returns a new SimpleStatement object!!!!!
     st = st.setPageSize(RESULTS_PER_PAGE);
     
  // Create the CqlSession object:
-    final String file = "secure-connect-firstdb.zip";
-    //   "<<CLIENT ID>>"
-    final String clientId = "eZIIARiMfsqfUQasMnqDJOyD";
-    // "<<CLIENT SECRET>>"
-    final String clientSecret = "fe+p9NhfXtEZIJUh4CnKwPs6FwgWtk3mx0mMWdF3BBGRKH24+snyLZZH9QLBA9lSGI3H7whQQgE6fcc.fjzZ1G40Z,sSW7gGA600FKe5t8EUyzKtAE5iXHZraZTkqF.f";
+    final String file = "secure-connect.zip";
+	// "<<CLIENT ID>>"
+	final String clientId = "xWWYApFRZRLxGUAkXrufjHkZ";
+	// "<<CLIENT SECRET>>"
+	final String clientSecret = "dxNxLJRKvIr0_Y+yE,OqWqzvR-1FsKFM1e.Ys8kfKxluo1s1K_YckN2q7lsqpvBEifmqfU7,TZu4h9tFPmG8WyLyNKy7xzGu+PZ5EHdHO5_lf1KJqs36RC8JI23.,HdE";
+
     
     URL connectBundleFile = AuthorPagination.class.getClassLoader().
         getResource(file);

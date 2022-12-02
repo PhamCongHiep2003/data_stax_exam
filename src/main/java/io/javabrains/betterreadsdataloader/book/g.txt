@@ -1,0 +1,23 @@
+CREATE TABLE book_test (
+    id text PRIMARY KEY,
+    author_id list<text>,
+    author_names list<text>,
+    book_name text,
+) WITH additional_write_policy = '99PERCENTILE'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.UnifiedCompactionStrategy'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99PERCENTILE';
+
+
+    INSERT INTO main.book_test (id, book_name, author_id, author_names) 
+    VALUES ('so1', 'quyen sach 1',['a1', 'a2', 'a3'],['Cong Hiep', 'Anh Vu', 'Minh Nghia'] ) ;

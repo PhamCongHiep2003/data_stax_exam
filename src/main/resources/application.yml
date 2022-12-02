@@ -18,8 +18,8 @@ spring:
   data:
     cassandra:
       keyspace-name: main
-      username: LWmmXppuqjCKBNptdRfWRDSc
-      password: 6sztikDWq-mSB9fF9L-C5KsZduN6jpJxZUJxE9_+4CQ1j7lrWwU.OMvW5Uh4SpLRqanCnEo6-rl4MoTZe+pnJxziItf91rGyxZwDq-ZOvy5r5sLmwbZPvYG42bUcyh7e
+      username: xWWYApFRZRLxGUAkXrufjHkZ
+      password: dxNxLJRKvIr0_Y+yE,OqWqzvR-1FsKFM1e.Ys8kfKxluo1s1K_YckN2q7lsqpvBEifmqfU7,TZu4h9tFPmG8WyLyNKy7xzGu+PZ5EHdHO5_lf1KJqs36RC8JI23.,HdE
       schema-action: create-if-not-exists
       request:
         timeout: 10s
@@ -35,4 +35,4 @@ astra.db:
     id: 5117c9fa-9c44-48d7-bf56-407ceebb57b5-1
     region: us-east1
     keyspace: main
-    application.token: AstraCS:LWmmXppuqjCKBNptdRfWRDSc:677fe10f5198b4381f102cf98b052a150ef2977ddf09afa913024a827ed04f7d
+    application.token: AstraCS:xWWYApFRZRLxGUAkXrufjHkZ:131dd6927fd4dda3d2ecc24f197e6ec6df38ea65bec587b267079626bf26745b

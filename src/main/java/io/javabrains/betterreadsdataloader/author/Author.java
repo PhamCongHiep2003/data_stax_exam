@@ -8,7 +8,6 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
 
-import jnr.ffi.Struct.pid_t;
 
 @Table(value = "author_by_id")
 public class Author {
@@ -63,6 +62,13 @@ public class Author {
     
     public static String toCSVHeader() {
         return "id,name,personalName\n";
+    }
+
+    @Override
+    public String toString() {
+        String k = "";
+        k += "Author(" + id + ", " + name + ")" ;
+        return k;
     }
 }
 

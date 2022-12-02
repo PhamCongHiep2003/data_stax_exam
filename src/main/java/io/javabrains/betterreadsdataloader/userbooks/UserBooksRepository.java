@@ -1,7 +1,7 @@
-package io.javabrains.betterreadsdataloader.userbooks;
+// package io.javabrains.betterreadsdataloader.userbooks;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
+// import org.springframework.data.cassandra.repository.CassandraRepository;
 
-public interface UserBooksRepository extends CassandraRepository<UserBooks, UserBooksPrimaryKey> {
+// public interface UserBooksRepository extends CassandraRepository<UserBooks, UserBooksPrimaryKey> {
     
-}
+// }

@@ -1,10 +1,6 @@
 package io.javabrains.betterreadsdataloader.book;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -21,7 +17,7 @@ import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
  */
 
 @Table(value = "book_by_id")
-public class Book {
+public class Book_Test {
     
     @Id @PrimaryKeyColumn(name = "book_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private String id;
@@ -38,13 +34,13 @@ public class Book {
     @CassandraType(type = Name.DATE)
     private LocalDate publishedDate;
 
-    // @Column("cover_ids")
-    // @CassandraType(type = Name.LIST, typeArguments = Name.TEXT)
-    // private List<String> coverIds;
+    @Column("cover_ids")
+    @CassandraType(type = Name.LIST, typeArguments = Name.TEXT)
+    private List<String> coverIds;
 
-    // @Column("author_names")
-    // @CassandraType(type = Name.LIST, typeArguments = Name.TEXT)
-    // private List<String> authorNames;
+    @Column("author_names")
+    @CassandraType(type = Name.LIST, typeArguments = Name.TEXT)
+    private List<String> authorNames;
 
     @Column("author_id")
     @CassandraType(type = Name.LIST, typeArguments = Name.TEXT)
@@ -82,7 +78,21 @@ public class Book {
         this.publishedDate = publishedDate;
     }
 
+    public List<String> getCoverIds() {
+        return coverIds;
+    }
 
+    public void setCoverIds(List<String> coverIds) {
+        this.coverIds = coverIds;
+    }
+
+    public List<String> getAuthorNames() {
+        return authorNames;
+    }
+
+    public void setAuthorNames(List<String> authorNames) {
+        this.authorNames = authorNames;
+    }
 
     public List<String> getAuthorIds() {
         return authorIds;
@@ -99,32 +109,17 @@ public class Book {
     //     return json;
     // }
 
-    public String toAuthorIdsString() {
-        String a ="[";
-        for(int i=0; i<=authorIds.size()-2; i++) {
-            a += authorIds.get(i) + ",";
-        }
-        a += authorIds.get(authorIds.size()-1) + "]";
-        return a;
-    }
+    
 
-    public String toDate() {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
-        if(this.publishedDate == null) {
-            return "";
-        } 
-        String strDate = this.publishedDate.format(dateFormat);  
-        return strDate;
-    }
     public String toCSVRecord() {
 
-        String CSV = "%s,\"%s\",\"%s\",\"%s\",\"%s\"";
-        CSV = String.format(CSV, id, name, description, toDate(), toAuthorIdsString());
+        String CSV = "%s,\"%s\",\"%s\"%s,\"%s,\"%s,\"%s\"";
+        CSV = String.format(CSV, id, name, description, publishedDate, coverIds, authorNames, authorIds);
         return CSV;
     }
     
     public static String toCSVHeader() {
-        return "book_id,book_name,book_description,published_date,author_id\n";
+        return "id,name,description,publishedDate,coverIds,authorNames,authorIds";
     }
 
 }
